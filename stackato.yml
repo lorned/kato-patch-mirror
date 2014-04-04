@@ -1,0 +1,15 @@
+name: kato-patch-mirror
+framework: php
+env:
+## Must be a valid version number.  Currently 3.0.1 and 3.2.1 are supported
+  TARGET_VERSION: 3.2.1
+hooks:
+  pre-running:
+## Downloads contents of kato patch server for targetted version
+  - cd kato-patch && wget -rH -np --quiet https://get.stackato.com/kato-patch/$TARGET_VERSION && mv get.stackato.com/kato-patch/* .
+## Downloads the kato-patch updates
+  - wget -rH -np --quiet https://get.stackato.com/kato-patch/updates/$TARGET_VERSION && mv get.stackato.com/kato-patch/updates/ updates/
+## Updates manifest.json to reflect new location of patches
+  - cd .. && sh manifest.sh
+## Downloads large objects currently stored on HPCS.  Updates contents of patches requiring those to reflect new location
+  - sh blobs.sh

@@ -5,6 +5,8 @@ env:
   TARGET_VERSION: 3.2.1
 hooks:
   pre-running:
+## Create extra folders
+  - mkdir blobs && mkdir kato-patch
 ## Downloads contents of kato patch server for targetted version
   - cd kato-patch && wget -rH -np --quiet https://get.stackato.com/kato-patch/$TARGET_VERSION && mv get.stackato.com/kato-patch/* .
 ## Downloads the kato-patch updates

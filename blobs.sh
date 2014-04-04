@@ -13,3 +13,4 @@ while read file; do
 done < ../version-blobs
 cd ~/kato-patch/$TARGET_VERSION
 grep -r1 -l hpcloudsvc . | xargs sed -i 's|https://a248.e.akamai.net/cdn.hpcloudsvc.com/g701e14e9fa37a30cfbbc3a01f78365e2/prodae1/|'$URI'/blobs/|g'
+rm ~/version-blobs && rm ~/folder-blobs
